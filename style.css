@@ -1,0 +1,413 @@
+/* ====== ioo: lembar gaya utama ====== */
+
+/* ---------- 1. Variabel warna dan ukuran ---------- */
+:root {
+  --latar: #2415D6;          /* warna latar halaman, bisa diganti oleh JavaScript */
+  --permen: #FF7AC8;         /* merah muda terang untuk aksen */
+  --lemon: #FFF04D;          /* kuning cerah untuk aksen */
+  --mint: #6BFFD1;           /* hijau mint untuk aksen */
+  --tinta: #160A3A;          /* ungu tua untuk teks dan kotak panggung */
+  --putih: #FFFFFF;          /* putih murni untuk mata dan sorotan */
+  --font-judul: "Bagel Fat One", "Arial Black", sans-serif; /* font judul + cadangan */
+  --font-teks: "DM Sans", system-ui, sans-serif;            /* font teks + cadangan */
+  --jeda: 220ms;             /* durasi transisi standar */
+}
+
+/* ---------- 2. Reset dasar ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;    /* padding dan border ikut dihitung dalam lebar elemen */
+}
+
+html {
+  scroll-behavior: smooth;   /* lompat ke anchor dengan gulir halus */
+}
+
+body {
+  margin: 0;                                   /* buang margin bawaan browser */
+  min-height: 100vh;                           /* halaman minimal setinggi layar */
+  background-color: var(--latar);              /* pakai warna latar dari variabel */
+  background-image: radial-gradient(rgba(255, 255, 255, 0.14) 2px, transparent 2px); /* pola titik halus */
+  background-size: 28px 28px;                  /* jarak antar titik */
+  color: var(--putih);                         /* teks default putih agar kontras dengan latar */
+  font-family: var(--font-teks);               /* font teks utama */
+  font-size: 1rem;                             /* ukuran dasar 16px */
+  line-height: 1.55;                           /* jarak antar baris nyaman dibaca */
+  transition: background-color 500ms ease;     /* ganti tema terasa mulus */
+}
+
+/* ---------- 3. Aksesibilitas ---------- */
+.lompat {
+  position: absolute;                          /* lepas dari alur halaman */
+  left: 1rem;                                  /* jarak dari kiri */
+  top: -4rem;                                  /* sembunyikan di atas layar */
+  padding: 0.6rem 1rem;                        /* ruang dalam tautan */
+  background: var(--lemon);                    /* warna kuning agar mencolok saat muncul */
+  color: var(--tinta);                         /* teks gelap di atas kuning */
+  border-radius: 0.6rem;                       /* sudut membulat */
+  z-index: 10;                                 /* di atas semua elemen lain */
+}
+
+.lompat:focus {
+  top: 1rem;                                   /* munculkan tautan saat fokus keyboard */
+}
+
+:focus-visible {
+  outline: 4px solid var(--lemon);             /* garis fokus tebal untuk pengguna keyboard */
+  outline-offset: 3px;                         /* beri jarak dari elemen */
+}
+
+.tanpa-js {
+  margin: 0;                                   /* tanpa margin agar menempel di atas */
+  padding: 1rem;                               /* ruang dalam */
+  background: var(--lemon);                    /* latar kuning peringatan */
+  color: var(--tinta);                         /* teks gelap */
+  text-align: center;                          /* posisi teks di tengah */
+}
+
+/* ---------- 4. Kepala dan judul ioo ---------- */
+.kepala {
+  padding: 3rem 1.5rem 1rem;                   /* ruang atas lebih longgar */
+  text-align: center;                          /* semua isi kepala di tengah */
+}
+
+.judul {
+  display: inline-flex;                        /* huruf dan mata berjajar dalam satu baris */
+  align-items: center;                         /* sejajar di tengah secara vertikal */
+  gap: 0.04em;                                 /* jarak rapat antar bagian judul */
+  margin: 0;                                   /* buang margin bawaan h1 */
+  font-family: var(--font-judul);              /* pakai font tebal khusus judul */
+  font-size: clamp(6rem, 24vw, 15rem);         /* ukuran raksasa yang menyesuaikan layar */
+  font-weight: 400;                            /* Bagel Fat One sudah tebal, jangan ditebalkan lagi */
+  line-height: 1;                              /* tinggi baris rapat */
+  color: var(--lemon);                         /* huruf i berwarna kuning */
+  text-shadow: 0.05em 0.05em 0 var(--tinta);   /* bayangan keras untuk kesan stiker */
+  transition: transform var(--jeda) ease;      /* animasi saat judul berubah ukuran */
+}
+
+.judul.terkejut {
+  transform: scale(1.08) rotate(-3deg);        /* judul membesar dan miring saat kejutan */
+}
+
+.huruf {
+  display: inline-block;                       /* agar bisa diberi transformasi */
+  transform: translateY(-0.02em);              /* naikkan sedikit supaya sejajar dengan mata */
+}
+
+.mata {
+  position: relative;                          /* jadi acuan posisi pupil */
+  display: inline-block;                       /* elemen berbentuk kotak yang bisa diukur */
+  width: 0.62em;                               /* lebar mata relatif terhadap font judul */
+  height: 0.62em;                              /* tinggi sama dengan lebar agar bulat */
+  margin-inline: 0.03em;                       /* jarak kiri kanan */
+  background: var(--putih);                    /* bagian putih mata */
+  border: 0.06em solid var(--tinta);           /* garis tepi tebal */
+  border-radius: 50%;                          /* membuat bentuk lingkaran */
+  box-shadow: 0.05em 0.05em 0 var(--tinta);    /* bayangan keras senada judul */
+  overflow: hidden;                            /* pupil tidak boleh keluar dari mata */
+  transition: height 90ms ease;                /* transisi cepat untuk kedipan */
+}
+
+.mata.kedip {
+  height: 0.08em;                              /* mata menyipit menjadi garis saat berkedip */
+}
+
+.pupil {
+  position: absolute;                          /* diposisikan bebas di dalam mata */
+  left: 50%;                                   /* mulai dari tengah horizontal */
+  top: 50%;                                    /* mulai dari tengah vertikal */
+  width: 0.24em;                               /* ukuran pupil */
+  height: 0.24em;                              /* tinggi pupil sama dengan lebarnya */
+  margin: -0.12em 0 0 -0.12em;                 /* geser setengah ukuran agar benar-benar di tengah */
+  background: var(--tinta);                    /* pupil berwarna gelap */
+  border-radius: 50%;                          /* bentuk bulat */
+  transform: translate(var(--px, 0), var(--py, 0)); /* posisi diatur JavaScript lewat variabel */
+}
+
+.tagline {
+  max-width: 34rem;                            /* batasi lebar agar baris tidak terlalu panjang */
+  margin: 1.2rem auto 0;                       /* tengah-kan blok dan beri jarak atas */
+  font-size: 1.15rem;                          /* sedikit lebih besar dari teks biasa */
+}
+
+/* ---------- 5. Tata letak utama ---------- */
+.isi {
+  display: grid;                               /* susun panggung dan panel dengan grid */
+  grid-template-columns: minmax(0, 1fr) 21rem; /* panggung fleksibel, panel lebar tetap */
+  gap: 1.5rem;                                 /* jarak antar kolom */
+  width: min(100% - 2rem, 78rem);              /* lebar maksimal dengan sisi kiri kanan aman */
+  margin: 2rem auto;                           /* tengah-kan dan beri jarak vertikal */
+}
+
+.panggung {
+  position: relative;                          /* acuan posisi untuk petunjuk */
+  border: 6px solid var(--tinta);              /* bingkai tebal */
+  border-radius: 2.5rem 0.75rem 2.5rem 0.75rem;/* sudut selang-seling supaya tidak seragam */
+  background: var(--tinta);                    /* warna dasar sebelum canvas digambar */
+  box-shadow: 0.7rem 0.7rem 0 var(--permen);   /* bayangan keras berwarna permen */
+  overflow: hidden;                            /* potong isi yang keluar dari sudut bulat */
+}
+
+#kanvas {
+  display: block;                              /* hilangkan celah bawaan elemen inline */
+  width: 100%;                                 /* penuhi lebar panggung */
+  height: min(68vh, 40rem);                    /* tinggi menyesuaikan layar, dengan batas atas */
+  min-height: 22rem;                           /* jangan terlalu pendek di layar kecil */
+  cursor: crosshair;                           /* kursor berbentuk bidikan */
+  touch-action: none;                          /* cegah gulir halaman saat menyeret di layar sentuh */
+}
+
+.petunjuk {
+  position: absolute;                          /* melayang di atas canvas */
+  left: 50%;                                   /* mulai dari tengah horizontal */
+  bottom: 1rem;                                /* menempel dekat tepi bawah */
+  margin: 0;                                   /* tanpa margin */
+  padding: 0.5rem 1rem;                        /* ruang dalam label */
+  background: var(--lemon);                    /* latar kuning */
+  color: var(--tinta);                         /* teks gelap */
+  border-radius: 999px;                        /* bentuk pil */
+  font-weight: 600;                            /* teks agak tebal */
+  transform: translateX(-50%);                 /* geser setengah lebar agar pas di tengah */
+  transition: opacity 400ms ease;              /* memudar saat disembunyikan */
+  pointer-events: none;                        /* klik tembus ke canvas */
+}
+
+.petunjuk.hilang {
+  opacity: 0;                                  /* sembunyikan petunjuk setelah pengguna mulai bermain */
+}
+
+/* ---------- 6. Panel kontrol ---------- */
+.panel {
+  display: flex;                               /* susun kelompok secara vertikal */
+  flex-direction: column;                      /* arah susunan ke bawah */
+  gap: 1rem;                                   /* jarak antar kelompok */
+}
+
+.kelompok {
+  padding: 1rem 1.2rem 1.2rem;                 /* ruang dalam kartu */
+  color: var(--tinta);                         /* teks gelap di atas kartu berwarna terang */
+  border: 4px solid var(--tinta);              /* garis tepi tebal senada panggung */
+}
+
+.kelompok h2 {
+  margin: 0 0 0.7rem;                          /* jarak bawah judul kelompok */
+  font-family: var(--font-judul);              /* judul kelompok memakai font yang sama */
+  font-size: 1.5rem;                           /* ukuran sedang */
+  font-weight: 400;                            /* biarkan setebal aslinya */
+}
+
+.kelompok-aksi  { background: var(--lemon);  border-radius: 1.6rem 0.5rem 1.6rem 0.5rem; } /* kartu aksi kuning */
+.kelompok-atur  { background: var(--mint);   border-radius: 0.5rem 1.6rem 0.5rem 1.6rem; } /* kartu atur mint */
+.kelompok-angka { background: var(--putih);  border-radius: 1rem; }                        /* kartu angka putih */
+.kelompok-oracle{ background: var(--permen); border-radius: 2rem 0.5rem 0.5rem 0.5rem; }   /* kartu ramalan merah muda */
+.kelompok-log   { background: var(--putih);  border-radius: 0.5rem 0.5rem 2rem 0.5rem; }   /* kartu catatan putih */
+
+/* ---------- 7. Tombol ---------- */
+.tombol-grid {
+  display: grid;                               /* tombol disusun dalam grid */
+  grid-template-columns: 1fr 1fr;              /* dua kolom sama lebar */
+  gap: 0.6rem;                                 /* jarak antar tombol */
+}
+
+button {
+  padding: 0.7rem 0.6rem;                      /* ruang dalam tombol */
+  font: 600 0.95rem var(--font-teks);          /* ukuran dan jenis huruf tombol */
+  color: var(--tinta);                         /* teks gelap */
+  background: var(--putih);                    /* latar putih */
+  border: 3px solid var(--tinta);              /* garis tepi tebal */
+  border-radius: 0.8rem;                       /* sudut membulat */
+  box-shadow: 0.25rem 0.25rem 0 var(--tinta);  /* bayangan keras seperti tombol timbul */
+  cursor: pointer;                             /* kursor tangan */
+  transition: transform 90ms ease, box-shadow 90ms ease, background-color 90ms ease; /* respons cepat */
+}
+
+button:hover {
+  background: var(--lemon);                    /* berubah kuning saat disorot */
+}
+
+button:active {
+  transform: translate(0.25rem, 0.25rem);      /* tombol tergeser seolah ditekan */
+  box-shadow: 0 0 0 var(--tinta);              /* bayangan hilang saat ditekan */
+}
+
+button[aria-pressed="true"] {
+  background: var(--tinta);                    /* tombol aktif berlatar gelap */
+  color: var(--lemon);                         /* teks kuning agar terbaca */
+}
+
+.kelompok-oracle button {
+  width: 100%;                                 /* tombol ramalan selebar kartu */
+  margin-top: 0.8rem;                          /* jarak dari teks ramalan */
+}
+
+/* ---------- 8. Slider ---------- */
+.baris-slider {
+  display: flex;                               /* nama dan nilai sebaris */
+  justify-content: space-between;              /* nama di kiri, nilai di kanan */
+  margin-top: 0.7rem;                          /* jarak antar slider */
+  font-weight: 600;                            /* teks label agak tebal */
+}
+
+.baris-slider output {
+  min-width: 2.6rem;                           /* lebar tetap agar layout tidak bergoyang */
+  text-align: right;                           /* angka rata kanan */
+  font-variant-numeric: tabular-nums;          /* angka selebar sama */
+}
+
+input[type="range"] {
+  width: 100%;                                 /* slider selebar kartu */
+  accent-color: var(--tinta);                  /* warna slider bawaan browser mengikuti tema */
+}
+
+/* ---------- 9. Statistik dan meter ---------- */
+.statistik {
+  display: grid;                               /* tiga statistik dalam grid */
+  grid-template-columns: repeat(3, 1fr);       /* tiga kolom sama lebar */
+  gap: 0.5rem;                                 /* jarak antar kolom */
+  margin: 0;                                   /* buang margin bawaan dl */
+  text-align: center;                          /* isi di tengah */
+}
+
+.statistik dt {
+  font-size: 0.85rem;                          /* nama statistik kecil */
+}
+
+.statistik dd {
+  margin: 0;                                   /* buang indentasi bawaan dd */
+  font-family: var(--font-judul);              /* angka memakai font judul */
+  font-size: 1.6rem;                           /* angka besar agar cepat terbaca */
+  font-variant-numeric: tabular-nums;          /* angka selebar sama */
+}
+
+.label-meter {
+  margin: 0.9rem 0 0.3rem;                     /* jarak atas dan bawah label */
+  font-size: 0.9rem;                           /* label kecil */
+}
+
+.meter {
+  height: 1.3rem;                              /* tinggi batang meter */
+  border: 3px solid var(--tinta);              /* garis tepi meter */
+  border-radius: 999px;                        /* ujung bulat */
+  background: #E9E4FF;                         /* warna kosong keunguan */
+  overflow: hidden;                            /* isi meter tidak keluar dari ujung bulat */
+}
+
+.meter-isi {
+  width: 0%;                                   /* awal kosong, diubah JavaScript */
+  height: 100%;                                /* penuhi tinggi meter */
+  background: linear-gradient(90deg, var(--mint), var(--lemon), var(--permen)); /* dari tenang ke liar */
+  transition: width 150ms linear;              /* perubahan lebar terasa halus */
+}
+
+/* ---------- 10. Ramalan dan catatan ---------- */
+.oracle-teks {
+  min-height: 4.6rem;                          /* tinggi minimal agar kartu tidak melompat saat teks berubah */
+  margin: 0;                                   /* tanpa margin */
+  font-size: 1.05rem;                          /* ukuran nyaman dibaca */
+  font-weight: 600;                            /* teks agak tebal */
+}
+
+.log {
+  margin: 0;                                   /* tanpa margin bawaan */
+  padding: 0;                                  /* tanpa indentasi bawaan */
+  list-style: none;                            /* buang titik daftar */
+  font-size: 0.9rem;                           /* teks catatan kecil */
+}
+
+.log li {
+  padding: 0.3rem 0;                           /* jarak vertikal antar entri */
+  border-bottom: 2px dashed rgba(22, 10, 58, 0.25); /* garis putus-putus pemisah */
+}
+
+.log li:last-child {
+  border-bottom: 0;                            /* entri terakhir tanpa garis */
+}
+
+.rahasia {
+  margin: 0.8rem 0 0;                          /* jarak dari daftar catatan */
+  font-size: 0.85rem;                          /* teks kecil */
+  font-style: italic;                          /* miring seperti bisikan */
+}
+
+/* ---------- 11. Bantuan, pita, dan kaki ---------- */
+.bantuan {
+  width: min(100% - 2rem, 78rem);              /* lebar sejajar dengan area utama */
+  margin: 0 auto 1.5rem;                       /* tengah-kan dan beri jarak bawah */
+}
+
+.bantuan summary {
+  cursor: pointer;                             /* kursor tangan menandakan bisa diklik */
+  font-weight: 600;                            /* pemicu agak tebal */
+}
+
+.daftar-pintasan {
+  columns: 2;                                  /* daftar dibagi dua kolom */
+  margin: 0.8rem 0 0;                          /* jarak dari pemicu */
+  padding-left: 1.2rem;                        /* indentasi daftar */
+}
+
+kbd {
+  padding: 0.1rem 0.5rem;                      /* ruang dalam tuts */
+  color: var(--tinta);                         /* teks gelap */
+  background: var(--lemon);                    /* latar kuning */
+  border: 2px solid var(--tinta);              /* garis tepi tuts */
+  border-radius: 0.4rem;                       /* sudut membulat kecil */
+  font-family: var(--font-teks);               /* pakai font teks, bukan monospace */
+  font-weight: 600;                            /* teks agak tebal */
+}
+
+.pita {
+  overflow: hidden;                            /* sembunyikan teks yang keluar dari pita */
+  background: var(--tinta);                    /* latar gelap */
+  border-block: 4px solid var(--lemon);        /* garis kuning di atas dan bawah */
+  white-space: nowrap;                         /* teks tidak turun baris */
+}
+
+.pita-jalur {
+  display: inline-flex;                        /* dua salinan teks berjajar */
+  animation: geser-pita 22s linear infinite;   /* bergerak terus tanpa henti */
+}
+
+.pita-jalur span {
+  padding: 0.6rem 2rem;                        /* jarak antar salinan */
+  font-family: var(--font-judul);              /* font judul agar tebal */
+  font-size: 1.3rem;                           /* ukuran teks pita */
+  color: var(--mint);                          /* teks mint di atas latar gelap */
+}
+
+.kaki {
+  padding: 1.5rem;                             /* ruang dalam kaki halaman */
+  text-align: center;                          /* teks di tengah */
+  font-size: 0.9rem;                           /* teks kecil */
+}
+
+/* ---------- 12. Animasi ---------- */
+@keyframes geser-pita {
+  from { transform: translateX(0); }           /* mulai dari posisi awal */
+  to   { transform: translateX(-50%); }        /* geser setengah lebar, tepat satu salinan */
+}
+
+/* ---------- 13. Layar kecil ---------- */
+@media (max-width: 62rem) {
+  .isi {
+    grid-template-columns: minmax(0, 1fr);     /* satu kolom: panggung di atas, panel di bawah */
+  }
+
+  .daftar-pintasan {
+    columns: 1;                                /* daftar pintasan jadi satu kolom */
+  }
+}
+
+/* ---------- 14. Hormati preferensi kurangi gerakan ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .pita-jalur {
+    animation: none;                           /* hentikan pita berjalan */
+  }
+
+  body,
+  .judul,
+  button {
+    transition: none;                          /* matikan transisi lain */
+  }
+}

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<!-- Menyatakan bahwa dokumen ini memakai standar HTML5 -->
+<html lang="id">
+<!-- Bahasa halaman: Indonesia, membantu pembaca layar dan mesin pencari -->
+<head>
+  <!-- Encoding UTF-8 agar huruf dan simbol tampil benar -->
+  <meta charset="UTF-8" />
+  <!-- Membuat halaman menyesuaikan lebar layar ponsel -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Deskripsi singkat untuk hasil pencarian -->
+  <meta name="description" content="ioo: taman bermain bola liar dengan gravitasi yang bisa dibalik." />
+  <!-- Judul tab browser -->
+  <title>ioo</title>
+  <!-- Mempercepat koneksi ke server font Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <!-- Koneksi ke tempat file font disimpan -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <!-- Memuat font Bagel Fat One (judul) dan DM Sans (teks) -->
+  <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=DM+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <!-- Menghubungkan file gaya tampilan -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<!-- Awal isi halaman yang terlihat -->
+<body>
+  <!-- Tautan untuk pengguna keyboard agar bisa langsung ke area utama -->
+  <a class="lompat" href="#panggung">Lompat ke panggung</a>
+
+  <!-- Pesan untuk pengunjung yang mematikan JavaScript -->
+  <noscript>
+    <!-- Menjelaskan bahwa animasi butuh JavaScript -->
+    <p class="tanpa-js">Halaman ini butuh JavaScript supaya bola bisa bergerak.</p>
+  </noscript>
+
+  <!-- Kepala halaman berisi judul besar -->
+  <header class="kepala">
+    <!-- Judul utama: huruf i lalu dua mata yang mengikuti kursor -->
+    <h1 class="judul" id="judul" aria-label="ioo">
+      <!-- Huruf i dibuat dari teks biasa -->
+      <span class="huruf" aria-hidden="true">i</span>
+      <!-- Mata pertama (mewakili huruf o pertama) -->
+      <span class="mata" aria-hidden="true">
+        <!-- Pupil digerakkan oleh JavaScript -->
+        <span class="pupil"></span>
+      </span>
+      <!-- Mata kedua (mewakili huruf o kedua) -->
+      <span class="mata" aria-hidden="true">
+        <!-- Pupil kedua, juga digerakkan JavaScript -->
+        <span class="pupil"></span>
+      </span>
+    </h1>
+    <!-- Kalimat pembuka yang menjelaskan apa yang bisa dilakukan -->
+    <p class="tagline">Taman bermain tanpa aturan. Lempar bola, balik gravitasi, lalu lihat apa yang terjadi.</p>
+  </header>
+
+  <!-- Area utama: panggung di kiri, panel kontrol di kanan -->
+  <main class="isi">
+    <!-- Bagian panggung tempat bola bergerak -->
+    <section class="panggung" id="panggung" aria-label="Panggung bola">
+      <!-- Canvas: kertas gambar digital untuk animasi bola -->
+      <canvas id="kanvas" role="img" aria-label="Bola-bola warna-warni memantul di dalam kotak"></canvas>
+      <!-- Petunjuk singkat yang hilang setelah pengguna berinteraksi -->
+      <p class="petunjuk" id="petunjuk">Klik untuk melempar, tahan dan seret untuk menarik bola.</p>
+    </section>
+
+    <!-- Panel samping berisi semua kontrol -->
+    <aside class="panel" aria-label="Kontrol">
+      <!-- Kelompok 1: tombol aksi -->
+      <section class="kelompok kelompok-aksi">
+        <!-- Judul kelompok aksi -->
+        <h2>Aksi</h2>
+        <!-- Pembungkus tombol agar rapi dalam grid -->
+        <div class="tombol-grid">
+          <!-- Melempar sejumlah bola baru sesuai slider -->
+          <button type="button" id="btn-lempar">Lempar bola</button>
+          <!-- Membalik arah gravitasi; aria-pressed memberi tahu status aktif -->
+          <button type="button" id="btn-gravitasi" aria-pressed="false">Balik gravitasi</button>
+          <!-- Mode kacau: bola diberi dorongan acak terus-menerus -->
+          <button type="button" id="btn-kacau" aria-pressed="false">Mode kacau</button>
+          <!-- Mengganti tema warna secara acak -->
+          <button type="button" id="btn-warna">Ganti warna</button>
+          <!-- Membekukan atau melanjutkan gerak bola -->
+          <button type="button" id="btn-bekukan" aria-pressed="false">Bekukan</button>
+          <!-- Menghapus semua bola dari panggung -->
+          <button type="button" id="btn-bersih">Bersihkan</button>
+        </div>
+      </section>
+
+      <!-- Kelompok 2: slider pengaturan -->
+      <section class="kelompok kelompok-atur">
+        <!-- Judul kelompok pengaturan -->
+        <h2>Atur</h2>
+        <!-- Slider jumlah bola per lemparan -->
+        <label class="baris-slider" for="range-jumlah">
+          <!-- Nama pengaturan -->
+          <span>Bola per lemparan</span>
+          <!-- Nilai yang sedang dipilih -->
+          <output id="nilai-jumlah">8</output>
+        </label>
+        <!-- Input geser: minimal 1, maksimal 30 -->
+        <input type="range" id="range-jumlah" min="1" max="30" value="8" />
+        <!-- Slider kelenturan pantulan -->
+        <label class="baris-slider" for="range-pantul">
+          <!-- Nama pengaturan -->
+          <span>Kelenturan pantulan</span>
+          <!-- Nilai kelenturan -->
+          <output id="nilai-pantul">0.80</output>
+        </label>
+        <!-- Di atas 1.00 bola makin liar tiap memantul -->
+        <input type="range" id="range-pantul" min="0.3" max="1.05" step="0.01" value="0.8" />
+        <!-- Slider kekuatan tarikan saat menyeret -->
+        <label class="baris-slider" for="range-tarik">
+          <!-- Nama pengaturan -->
+          <span>Kekuatan tarikan</span>
+          <!-- Nilai tarikan -->
+          <output id="nilai-tarik">50</output>
+        </label>
+        <!-- Semakin besar, semakin kuat bola tersedot ke kursor -->
+        <input type="range" id="range-tarik" min="0" max="100" value="50" />
+        <!-- Slider kecepatan waktu -->
+        <label class="baris-slider" for="range-kecepatan">
+          <!-- Nama pengaturan -->
+          <span>Kecepatan waktu</span>
+          <!-- Nilai kecepatan -->
+          <output id="nilai-kecepatan">1.0</output>
+        </label>
+        <!-- Kecepatan 0.3 seperti gerak lambat, 2.5 seperti dipercepat -->
+        <input type="range" id="range-kecepatan" min="0.3" max="2.5" step="0.1" value="1" />
+      </section>
+
+      <!-- Kelompok 3: angka statistik -->
+      <section class="kelompok kelompok-angka">
+        <!-- Judul kelompok statistik -->
+        <h2>Angka</h2>
+        <!-- Daftar definisi: pasangan nama dan nilai -->
+        <dl class="statistik">
+          <!-- Jumlah bola saat ini -->
+          <div><dt>Bola</dt><dd id="stat-bola">0</dd></div>
+          <!-- Jumlah tabrakan antar bola -->
+          <div><dt>Tabrakan</dt><dd id="stat-tabrak">0</dd></div>
+          <!-- Arah gravitasi saat ini -->
+          <div><dt>Gravitasi</dt><dd id="stat-gravitasi">turun</dd></div>
+        </dl>
+        <!-- Label untuk meter kekacauan -->
+        <p class="label-meter" id="label-meter">Tingkat kekacauan</p>
+        <!-- Batang meter: lebar isinya berubah mengikuti kecepatan bola -->
+        <div class="meter" role="progressbar" aria-labelledby="label-meter" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="meter">
+          <!-- Bagian yang terisi -->
+          <div class="meter-isi" id="meter-isi"></div>
+        </div>
+      </section>
+
+      <!-- Kelompok 4: ramalan acak -->
+      <section class="kelompok kelompok-oracle">
+        <!-- Judul kelompok ramalan -->
+        <h2>Ramalan ioo</h2>
+        <!-- Teks ramalan; aria-live agar pembaca layar membacakan perubahan -->
+        <p class="oracle-teks" id="oracle-teks" aria-live="polite">Tekan tombol di bawah untuk mendengar ramalan.</p>
+        <!-- Tombol memunculkan ramalan baru -->
+        <button type="button" id="btn-oracle">Minta ramalan</button>
+      </section>
+
+      <!-- Kelompok 5: catatan kejadian -->
+      <section class="kelompok kelompok-log">
+        <!-- Judul kelompok catatan -->
+        <h2>Catatan</h2>
+        <!-- Daftar kejadian terbaru -->
+        <ul class="log" id="log">
+          <!-- Entri awal sebelum ada aktivitas -->
+          <li>Panggung siap. Belum ada bola.</li>
+        </ul>
+        <!-- Bisikan tentang rahasia halaman -->
+        <p class="rahasia">Coba ketik tiga huruf dari judul di keyboard.</p>
+      </section>
+    </aside>
+  </main>
+
+  <!-- Bagian bantuan yang bisa dibuka dan ditutup -->
+  <section class="bantuan">
+    <!-- Details: elemen bawaan HTML untuk konten lipat -->
+    <details>
+      <!-- Teks yang selalu terlihat sebagai pemicu -->
+      <summary>Cara bermain dan pintasan keyboard</summary>
+      <!-- Daftar pintasan -->
+      <ul class="daftar-pintasan">
+        <!-- Pintasan melempar bola -->
+        <li><kbd>Spasi</kbd> melempar bola</li>
+        <!-- Pintasan membalik gravitasi -->
+        <li><kbd>G</kbd> membalik gravitasi</li>
+        <!-- Pintasan mode kacau -->
+        <li><kbd>K</kbd> menyalakan atau mematikan mode kacau</li>
+        <!-- Pintasan mengganti warna -->
+        <li><kbd>W</kbd> mengganti warna</li>
+        <!-- Pintasan membersihkan panggung -->
+        <li><kbd>B</kbd> membersihkan panggung</li>
+      </ul>
+    </details>
+  </section>
+
+  <!-- Pita teks berjalan sebagai hiasan di atas kaki halaman -->
+  <div class="pita" aria-hidden="true">
+    <!-- Isi pita diulang dua kali agar putarannya mulus tanpa jeda -->
+    <div class="pita-jalur">
+      <!-- Rombongan kata pertama -->
+      <span>pantul pantul pantul gravitasi terbalik bola liar mata mengintai pantul pantul</span>
+      <!-- Salinan yang sama untuk menyambung animasi -->
+      <span>pantul pantul pantul gravitasi terbalik bola liar mata mengintai pantul pantul</span>
+    </div>
+  </div>
+
+  <!-- Kaki halaman -->
+  <footer class="kaki">
+    <!-- Keterangan kecil -->
+    <p>ioo dibuat dengan HTML, CSS, dan JavaScript tanpa library apa pun.</p>
+  </footer>
+
+  <!-- Menghubungkan file logika; diletakkan di akhir agar elemen sudah ada -->
+  <script src="script.js"></script>
+</body>
+<!-- Akhir dokumen HTML -->
+</html>
