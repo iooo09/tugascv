@@ -1,19 +1,21 @@
+/* ===== Variabel warna, font, dan jarak ===== */
 :root {
   --bg: #000000;
   --text: #eaeaea;
+  --muted: #a3a3a3;
+  --line: #2a2a2a;
   --accent: #7dd3fc;
   --heading: #c4b5fd;
   --amber: #fbbf24;
   --mint: #6ee7b7;
   --rose: #fb7185;
-  --font: "Courier New", monospace;
-  --size: 16px;
-  --gap: 12px;
-  --box-gap: 24px;
-  --box-padding: 20px;
-  --box-radius: 8px;
+  --font: Georgia, "Times New Roman", serif;
+  --size: 17px;
+  --gap: 24px;
+  --section-gap: 32px;
 }
 
+/* ===== Dasar halaman ===== */
 * {
   box-sizing: border-box;
 }
@@ -23,57 +25,124 @@ body {
   color: var(--text);
   font-family: var(--font);
   font-size: var(--size);
+  line-height: 1.6;
   margin: 0;
   padding: var(--gap);
 }
 
+/* ===== Header: nama besar di atas ===== */
+.profile-header {
+  padding-bottom: var(--section-gap);
+  margin-bottom: var(--section-gap);
+  border-bottom: 1px solid var(--line);
+}
+
 .profile-header h1 {
   color: var(--accent);
+  font-size: clamp(2.25rem, 8vw, 5rem);
+  line-height: 1.05;
+  font-weight: normal;
+  margin: 0 0 20px;
   overflow-wrap: anywhere;
 }
 
-.profile-header p {
-  color: var(--text);
+/* Info singkat berbentuk label bulat */
+.info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.info p {
+  color: var(--muted);
+  border: 1px solid var(--muted);
+  border-radius: 999px;
+  padding: 2px 14px;
+  margin: 0;
+  font-size: 0.9rem;
 }
 
 .profile-header .welcome {
-  color: var(--amber);
-}
-
-.box {
-  border: 1px solid var(--accent);
-  border-radius: var(--box-radius);
-  padding: var(--box-padding);
-  margin-bottom: var(--box-gap);
-}
-
-.box h2 {
   color: var(--heading);
-  margin-top: 0;
+  font-size: 1.25rem;
+  font-style: italic;
+  margin: 0;
 }
 
-.box p,
-.box ul {
+/* ===== Bagian isi: satu kolom di HP ===== */
+.sections {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--section-gap);
+}
+
+.section {
+  border-top: 4px solid var(--line);
+  padding-top: 16px;
+}
+
+.section h2 {
+  font-size: 1.5rem;
+  font-weight: normal;
+  margin: 0 0 12px;
+}
+
+.section p,
+.section ul {
   overflow-wrap: anywhere;
 }
 
-.about-text {
-  color: var(--mint);
-  margin-bottom: 0;
+/* Tiap bagian punya warna sendiri */
+#about {
+  border-top-color: var(--mint);
 }
 
-.box ul {
-  margin-bottom: 0;
-}
-
-.box li:nth-child(3n + 1) {
+#about h2 {
   color: var(--mint);
 }
 
-.box li:nth-child(3n + 2) {
+#experience {
+  border-top-color: var(--rose);
+}
+
+#experience h2 {
   color: var(--rose);
 }
 
-.box li:nth-child(3n) {
+#contact {
+  border-top-color: var(--amber);
+}
+
+#contact h2 {
   color: var(--amber);
+}
+
+.about-text {
+  margin: 0;
+}
+
+/* ===== Daftar: tanpa bullet, dipisah garis tipis ===== */
+.section ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.section li {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.section li:last-child {
+  border-bottom: none;
+}
+
+/* ===== Laptop: tiga kolom sejajar ===== */
+@media (min-width: 900px) {
+  .sections {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--gap);
+    align-items: start;
+  }
 }
