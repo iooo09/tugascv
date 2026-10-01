@@ -15,6 +15,7 @@
   --box-radius: 8px;
 }
 
+/* ===== Dasar halaman ===== */
 * {
   box-sizing: border-box;
 }
@@ -42,7 +43,6 @@ body {
   color: var(--amber);
 }
 
-/* ===== Kotak bagian ===== */
 .box {
   border: 1px solid var(--accent);
   border-radius: var(--box-radius);
@@ -64,7 +64,6 @@ body {
   color: var(--mint);
   margin-bottom: 0;
 }
-
 .box ul {
   margin-bottom: 0;
 }
