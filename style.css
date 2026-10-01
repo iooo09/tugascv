@@ -1,12 +1,12 @@
 /* ===== Variabel warna, font, dan jarak ===== */
 :root {
   --bg: #000000;
-  --text: #ffffff;
-  --cyan: #00f0d8;
-  --blue: #4f7dff;
-  --yellow: #ffd400;
-  --green: #39ff14;
-  --red: #ff3b3b;
+  --text: #eaeaea;
+  --accent: #7dd3fc;
+  --heading: #c4b5fd;
+  --amber: #fbbf24;
+  --mint: #6ee7b7;
+  --rose: #fb7185;
   --font: "Courier New", monospace;
   --size: 16px;
   --gap: 12px;
@@ -15,7 +15,6 @@
   --box-radius: 8px;
 }
 
-/* ===== Dasar halaman ===== */
 * {
   box-sizing: border-box;
 }
@@ -31,7 +30,7 @@ body {
 
 /* ===== Header ===== */
 .profile-header h1 {
-  color: var(--cyan);
+  color: var(--accent);
   overflow-wrap: anywhere;
 }
 
@@ -40,19 +39,19 @@ body {
 }
 
 .profile-header .welcome {
-  color: var(--yellow);
+  color: var(--amber);
 }
 
 /* ===== Kotak bagian ===== */
 .box {
-  border: 1px solid var(--cyan);
+  border: 1px solid var(--accent);
   border-radius: var(--box-radius);
   padding: var(--box-padding);
   margin-bottom: var(--box-gap);
 }
 
 .box h2 {
-  color: var(--blue);
+  color: var(--heading);
   margin-top: 0;
 }
 
@@ -62,23 +61,22 @@ body {
 }
 
 .about-text {
-  color: var(--green);
+  color: var(--mint);
   margin-bottom: 0;
 }
 
-/* ===== Daftar: warna bergantian hijau, merah, kuning ===== */
 .box ul {
   margin-bottom: 0;
 }
 
 .box li:nth-child(3n + 1) {
-  color: var(--green);
+  color: var(--mint);
 }
 
 .box li:nth-child(3n + 2) {
-  color: var(--red);
+  color: var(--rose);
 }
 
 .box li:nth-child(3n) {
-  color: var(--yellow);
+  color: var(--amber);
 }
