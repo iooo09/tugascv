@@ -15,7 +15,6 @@
   --box-radius: 8px;
 }
 
-/* ===== Dasar halaman ===== */
 * {
   box-sizing: border-box;
 }
@@ -64,6 +63,7 @@ body {
   color: var(--mint);
   margin-bottom: 0;
 }
+
 .box ul {
   margin-bottom: 0;
 }
