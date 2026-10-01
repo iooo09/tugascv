@@ -1,4 +1,3 @@
-/* ===== Variabel warna, font, dan jarak ===== */
 :root {
   --bg: #000000;
   --text: #eaeaea;
@@ -28,7 +27,6 @@ body {
   padding: var(--gap);
 }
 
-/* ===== Header ===== */
 .profile-header h1 {
   color: var(--accent);
   overflow-wrap: anywhere;
