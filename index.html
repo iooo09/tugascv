@@ -1,46 +1,115 @@
 <!DOCTYPE html>
+<!-- Struktur dokumen: bahasa Indonesia, karakter UTF-8, lebar layar mengikuti perangkat -->
 <html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Miftakhul Martio Iqbal</title>
+  <!-- Meta dan SEO dasar: judul tab dan deskripsi halaman -->
+  <title>Miftakhul Martio Iqbal | CV</title>
+  <meta name="description" content="CV Miftakhul Martio Iqbal, SMA Gunung Madu, Lampung Tengah.">
+  <meta name="author" content="Miftakhul Martio Iqbal">
+  <!-- Jalur berkas relatif: style.css harus berada di folder yang sama dengan index.html -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+  <!-- HEADER: tempat foto, nama, info singkat, kalimat sambutan -->
   <header class="profile-header">
-    <h1>Miftakhul Martio Iqbal</h1>
-    <div class="info">
-      <p>SMA Gunung Madu</p>
-      <p>Lampung Tengah</p>
-      <p>17 tahun</p>
+    <!-- Cara isi foto: simpan file foto Anda dengan nama foto.jpg di folder ini -->
+    <div class="photo-slot">
+      <img src="foto.jpg" alt="Foto Miftakhul Martio Iqbal" width="600" height="600">
     </div>
-    <p class="welcome">Saya adalah pelajar SMADU yang sedang belajar HTML &amp; CSS</p>
+    <div class="profile-text">
+      <h1>Miftakhul Martio Iqbal</h1>
+      <ul class="info">
+        <li><abbr title="Sekolah Menengah Atas">SMA</abbr> Gunung Madu</li>
+        <li>Lampung Tengah</li>
+        <li>17 tahun</li>
+      </ul>
+      <!-- Kutipan: kalimat sambutan -->
+      <blockquote class="welcome">Saya adalah pelajar SMADU yang sedang belajar HTML &amp; CSS</blockquote>
+    </div>
   </header>
 
-  <main class="sections">
-    <section class="section" id="about">
-      <h2>About</h2>
-      <p class="about-text">murid biasa aja tapi terlalu biasa</p>
-    </section>
+  <main>
+    <div class="columns">
 
-    <section class="section" id="experience">
-      <h2>Experience</h2>
-      <ul>
-        <li>kejebak di tengah-tengah tebu</li>
-        <li>bertahan di gunung madu selama 17 tahun</li>
-      </ul>
-    </section>
+      <!-- KOLOM KIRI: Tentang saya, Hobi, Experience -->
+      <div class="col-left">
+        <section class="section" id="about">
+          <h2>Tentang saya</h2>
+          <p>murid biasa aja tapi terlalu biasa</p>
+        </section>
 
-    <section class="section" id="contact">
-      <h2>Contact</h2>
-      <ul>
-        <li>No HP: +62 821-8556-515</li>
-        <li>Email: miftakhulmartioiqbal08@gmail.com</li>
-        <li>GitHub: iooo09</li>
-        <li>TikTok: ansept37/iooo</li>
-        <li>Instagram: mftkhlmrtqbl</li>
-      </ul>
+        <section class="section" id="hobi">
+          <h2>Hobi</h2>
+          <ul>
+            <li>Fotografi</li>
+            <li>Game</li>
+          </ul>
+        </section>
+
+        <section class="section" id="experience">
+          <h2>Experience</h2>
+          <ul>
+            <li>kejebak di tengah-tengah tebu</li>
+            <li>bertahan di gunung madu selama 17 tahun</li>
+          </ul>
+        </section>
+      </div>
+
+      <!-- KOLOM KANAN: tabel detail pribadi (tambah atau hapus baris <tr> sesuai kebutuhan) -->
+      <section class="section" id="detail">
+        <h2>Detail pribadi</h2>
+        <table>
+          <tr><th scope="row">Nama</th><td>Miftakhul Martio Iqbal</td></tr>
+          <tr><th scope="row">Tempat, tanggal lahir</th><td>Lampung Tengah, 30 Maret 2009</td></tr>
+          <tr><th scope="row">Umur</th><td>17 tahun</td></tr>
+          <tr><th scope="row">Alamat</th><td>PT Gunung Madu Plantation</td></tr>
+          <tr><th scope="row">Sekolah</th><td><abbr title="Sekolah Menengah Atas">SMA</abbr> Gunung Madu</td></tr>
+          <tr><th scope="row">Kelas</th><td>XII C</td></tr>
+          <tr><th scope="row">Prestasi</th><td>Juara 2 <abbr title="Festival dan Lomba Seni Siswa Nasional">FLS3N</abbr> Fotografi Tingkat Provinsi Lampung</td></tr>
+          <tr><th scope="row">Organisasi</th><td>Alumni Warta Media</td></tr>
+          <tr><th scope="row">No HP</th><td><a href="tel:+628218556515">+62 821-8556-515</a></td></tr>
+          <tr><th scope="row">Email</th><td><a href="mailto:miftakhulmartioiqbal08@gmail.com">miftakhulmartioiqbal08@gmail.com</a></td></tr>
+        </table>
+      </section>
+    </div>
+
+    <!-- TERHUBUNG DENGAN SAYA: tautan akun dan formulir kontak -->
+    <section class="section" id="kontak">
+      <h2>Terhubung dengan saya</h2>
+
+      <!-- address: info kontak. target="_blank" membuka tautan di tab baru -->
+      <address>
+        <ul class="links">
+          <li><a href="https://github.com/iooo09" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+          <li><a href="https://www.instagram.com/mftkhlmrtqbl" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+          <li><a href="https://wa.me/628218556515" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
+          <li><a href="mailto:miftakhulmartioiqbal08@gmail.com">Email</a></li>
+        </ul>
+      </address>
+
+      <!-- Formulir: saat dikirim akan membuka aplikasi email pengunjung (tanpa server dan JavaScript) -->
+      <form action="mailto:miftakhulmartioiqbal08@gmail.com?subject=Pesan%20dari%20CV" method="post" enctype="text/plain">
+        <h3>Kirim pesan</h3>
+        <label for="nama">Nama</label>
+        <input type="text" id="nama" name="nama" placeholder="Nama Anda" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="email@contoh.com" required>
+
+        <label for="pesan">Pesan</label>
+        <textarea id="pesan" name="pesan" rows="4" placeholder="Tulis pesan Anda" required></textarea>
+
+        <button type="submit">Kirim</button>
+      </form>
     </section>
   </main>
+
+  <footer>
+    <p>&copy; 2026 Miftakhul Martio Iqbal</p>
+  </footer>
+
 </body>
 </html>
