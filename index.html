@@ -1,16 +1,21 @@
 <!DOCTYPE html>
+<!-- Struktur dokumen: bahasa Indonesia, karakter UTF-8, lebar layar mengikuti perangkat -->
 <html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Meta dan SEO dasar: judul tab dan deskripsi halaman -->
   <title>Miftakhul Martio Iqbal | CV</title>
   <meta name="description" content="CV Miftakhul Martio Iqbal, SMA Gunung Madu, Lampung Tengah.">
   <meta name="author" content="Miftakhul Martio Iqbal">
+  <!-- Jalur berkas relatif: style.css harus berada di folder yang sama dengan index.html -->
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+  <!-- HEADER: tempat foto, nama, info singkat, kalimat sambutan -->
   <header class="profile-header">
+    <!-- Cara isi foto: simpan file foto Anda dengan nama foto.jpg di folder ini -->
     <div class="photo-slot">
       <img src="foto.jpg" alt="Foto Miftakhul Martio Iqbal" width="600" height="600">
     </div>
@@ -21,6 +26,7 @@
         <li>Lampung Tengah</li>
         <li>17 tahun</li>
       </ul>
+      <!-- Kutipan: kalimat sambutan -->
       <blockquote class="welcome">Saya adalah pelajar SMADU yang sedang belajar HTML &amp; CSS</blockquote>
     </div>
   </header>
@@ -28,6 +34,7 @@
   <main>
     <div class="columns">
 
+      <!-- KOLOM KIRI: Tentang saya, Hobi, Experience -->
       <div class="col-left">
         <section class="section" id="about">
           <h2>Tentang saya</h2>
@@ -51,6 +58,7 @@
         </section>
       </div>
 
+      <!-- KOLOM KANAN: tabel detail pribadi (tambah atau hapus baris <tr> sesuai kebutuhan) -->
       <section class="section" id="detail">
         <h2>Detail pribadi</h2>
         <table>
@@ -66,16 +74,21 @@
       </section>
     </div>
 
+    <!-- TERHUBUNG DENGAN SAYA: tautan akun dan formulir kontak -->
     <section class="section" id="kontak">
       <h2>Terhubung dengan saya</h2>
 
+      <!-- address: info kontak. target="_blank" membuka tautan di tab baru -->
       <address>
         <ul class="links">
           <li><a href="https://github.com/iooo09" target="_blank" rel="noopener noreferrer">GitHub</a></li>
           <li><a href="https://www.instagram.com/mftkhlmrtqbl" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+          <li><a href="https://wa.me/628218556515" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
+          <li><a href="mailto:miftakhulmartioiqbal08@gmail.com">Email</a></li>
         </ul>
       </address>
 
+      <!-- Formulir: saat dikirim akan membuka aplikasi email pengunjung (tanpa server dan JavaScript) -->
       <form action="mailto:miftakhulmartioiqbal08@gmail.com?subject=Pesan%20dari%20CV" method="post" enctype="text/plain">
         <h3>Kirim pesan</h3>
         <label for="nama">Nama</label>
